@@ -1,10 +1,10 @@
-all: align-packed.so
+.PHONY: build clean
 
-align-packed.so: align-packed.cpp
-	clang++ -fno-rtti -shared -fPIC align-packed.cpp -o align-packed.so
+print-struct.so: print-struct.cpp
+	clang++ -fno-rtti -shared -fPIC print-struct.cpp -o print-struct.so
 
-test: align-packed.so
-	clang example/main.c -fplugin=$(shell pwd)/align-packed.so -Xclang -plugin -Xclang hello-world
+test: print-struct.so
+	clang example/main.c -fplugin=$(shell pwd)/print-struct.so -Xclang -plugin -Xclang hello-world
 
 clean:
-	rm align-packed.so
+	rm -f print-struct.so
