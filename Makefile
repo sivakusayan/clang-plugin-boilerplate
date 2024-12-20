@@ -1,4 +1,4 @@
-.PHONY: build clean
+.PHONY: test clean
 
 print-struct.so: print-struct.cpp
 	clang++ -fno-rtti -shared -fPIC print-struct.cpp -o print-struct.so
