@@ -11,29 +11,22 @@ using namespace clang;
 //-----------------------------------------------------------------------------
 class StructPrinter : public RecursiveASTVisitor<StructPrinter> {
 public:
-  bool VisitRecordDecl(RecordDecl *Decl);
-private:
-  ASTContext *Context;
+    bool VisitRecordDecl(RecordDecl *Declaration) {
+        llvm::outs() << "Struct Name: " << Declaration->getDeclName() << "\n";
+        return true;
+    }
 };
 
-bool StructPrinter::VisitRecordDecl(RecordDecl *Declaration) {
-  llvm::outs() << "Struct Name: " << Declaration->getDeclName() << "\n";
-  return true;
-}
 
 //-----------------------------------------------------------------------------
 // ASTConsumer
 //-----------------------------------------------------------------------------
 class PrintStructASTConsumer : public clang::ASTConsumer {
 public:
-  explicit PrintStructASTConsumer(ASTContext *Ctx) : Visitor() {}
-
   void HandleTranslationUnit(clang::ASTContext &Ctx) override {
-    Visitor.TraverseDecl(Ctx.getTranslationUnitDecl());
+    StructPrinter visitor;
+    visitor.TraverseDecl(Ctx.getTranslationUnitDecl());
   }
-
-private:
-  StructPrinter Visitor;
 };
 
 //-----------------------------------------------------------------------------
@@ -44,8 +37,7 @@ public:
   std::unique_ptr<clang::ASTConsumer>
   CreateASTConsumer(clang::CompilerInstance &Compiler,
                     llvm::StringRef InFile) override {
-    return std::unique_ptr<clang::ASTConsumer>(
-        std::make_unique<PrintStructASTConsumer>(&Compiler.getASTContext()));
+    return std::make_unique<PrintStructASTConsumer>();
   }
   bool ParseArgs(const CompilerInstance &CI,
                  const std::vector<std::string> &args) override {
