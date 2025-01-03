@@ -9,7 +9,8 @@ The repository consists of:
 ## Requirements
 
 You'll need:
-- Your C++ compiler of choice, `clang++` by default
+- A C++ compiler of your choice
+  - You can override the C++ compiler that `make` chooses by defining the `CXX` environment variable
 - The `clang` compiler
 - An installed set of `clang` and `llvm` development header files.
 
