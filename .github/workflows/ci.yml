@@ -12,5 +12,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Install dependencies
+      run: sudo apt install libclang-dev llvm-dev
     - name: Build and run plugin
       run: make test
