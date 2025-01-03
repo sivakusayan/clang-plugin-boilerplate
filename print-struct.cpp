@@ -12,6 +12,9 @@ using namespace clang;
 class StructPrinter : public RecursiveASTVisitor<StructPrinter> {
 public:
     bool VisitRecordDecl(RecordDecl *Declaration) {
+        DeclarationName name = Declaration->getDeclName();
+        if (name.isEmpty()) return true;
+
         llvm::outs() << "Struct Name: " << Declaration->getDeclName() << "\n";
         return true;
     }
