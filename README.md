@@ -1,5 +1,5 @@
 This repository holds a barebones `clang` plugin that prints the name of all named structures in a C program.
-The repository consists of:
+It consists of:
 
 - `print-struct.cpp`: The code for the plugin in question
 - `example/main.c`: An extremely simple C program to demonstrate the plugin's functionality
