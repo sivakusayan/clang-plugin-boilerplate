@@ -8,6 +8,15 @@ It consists of:
 This repository does not have an example of building on Windows. If that is what you need, I recommend
 you take a look at the [clang-tutor](https://github.com/banach-space/clang-tutor) repository, which has examples of building `clang` plugins with `cmake`.
 
+## Table of Contents
+
+- [What's a clang plugin?](#whats-a-clang-plugin)
+- [Building and Running](#building-and-running)
+  - [Ubuntu](#ubuntu)
+  - [MacOS](#macos)
+- [Troubleshooting](#troubleshooting)
+- [Credits](#credits)
+
 ## What's a clang plugin?
 
 A `clang` plugin is just a [shared object](https://en.wikipedia.org/wiki/Shared_library) that `clang` loads at runtime. It allows you to do all sorts of fancy things,
