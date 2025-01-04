@@ -24,6 +24,9 @@ Alternatively, you can just install the `clang` and `llvm` development packages.
 sudo apt install libclang-dev llvm-dev
 ```
 
+Make sure that the version of the header files you are installing match the version of the `clang` compiler you want to invoke the plugin with.
+You might otherwise get some very confusing errors when you load the plugin.
+
 ## Building and Running
 
 Building the plugin and running it on the example C file should be as simple as:
