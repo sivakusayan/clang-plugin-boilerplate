@@ -1,4 +1,4 @@
-This repository holds a barebones `clang` plugin that prints the name of all named structures in a C program.
+This repository holds a barebones `clang` [plugin](https://clang.llvm.org/docs/ClangPlugins.html) that prints the name of all named structures in a C program.
 It consists of:
 
 - `print-struct.cpp`: The code for the plugin in question
