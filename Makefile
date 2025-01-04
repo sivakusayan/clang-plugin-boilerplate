@@ -1,4 +1,5 @@
 .PHONY: test clean
+PLATFORM := $(shell uname -s)
 
 #==================================================================
 # BUILDING THE PLUGIN
@@ -11,12 +12,12 @@
 #    as that is not set by default on that platform. Otherwise, the linker will
 #    complain about undefined symbols.
 # 3. We need '-fno-rtti' for reasons I don't completely understand.
-CXXFLAGS += -std=c++17 -shared -fPIC -fno-rtti
-ifeq ($(shell uname -s),Darwin)
-	CXXFLAGS += -undefined dynamic_lookup
+override CXXFLAGS += -std=c++17 -shared -fPIC -fno-rtti
+ifeq ($(PLATFORM),Darwin)
+	override CXXFLAGS += -undefined dynamic_lookup
 endif
 print-struct.so: print-struct.cpp
-	$(CXX) $(CXXFLAGS) print-struct.cpp -o print-struct.so
+	$(CXX) $(CXXFLAGS) $(BLAH) print-struct.cpp -o print-struct.so
 
 #==================================================================
 # INVOKING THE PLUGIN
@@ -26,7 +27,7 @@ print-struct.so: print-struct.cpp
 # instead of Apple's clang. The latter seems to have some default behavior that doesn't 
 # play nicely with the plugin.
 CLANG_BINARY = clang
-ifeq ($(shell uname -s),Darwin)
+ifeq ($(PLATFORM),Darwin)
 	CLANG_BINARY = /opt/homebrew/opt/llvm/bin/clang
 endif
 
