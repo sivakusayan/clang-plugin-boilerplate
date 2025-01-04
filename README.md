@@ -8,34 +8,39 @@ It consists of:
 This repository does not have an example of building on Windows. If that is what you need, I recommend
 you take a look at the [clang-tutor](https://github.com/banach-space/clang-tutor) repository, which has examples of building `clang` plugins with `cmake`.
 
-## Requirements
-
-You'll need:
-- A C++ compiler of your choice
-  - You can override the C++ compiler that `make` chooses by defining the `CXX` environment variable
-- An installed set of `clang` and `llvm` development header files. You can get these a few different ways:
-    - You can get these header files by [building and installing](https://clang.llvm.org/get_started.html) `clang` from source.
-    - (Ubuntu) Install the `clang` and `llvm` development packages by running `sudo apt install libclang-dev llvm-dev`
-    - (MacOS) Install `llvm` with homebrew by running `brew install llvm`
-- A `clang` compiler whose version matches the version of the header files you have installed
-    - If you don't follow this step, you might get some confusing ABI related issues.
-
 ## Building and Running
 
-Building the plugin and running it on `example/main.c` should be as simple as running:
+### Ubuntu
 
+If you have built and installed `clang` from source, you should already have all the development header files necessary.
+In that case, building the plugin and running it on `example/main.c` should be as simple as running:
 ```
 make test
 ```
+Otherwise, if you don't have the necessary header files, you'll need to install the relevant development packages:
 
-If you're getting complaints about missing header files, you probably need to add a `CXXFLAG` to specify what the include paths are for the `clang` and `llvm` development header files.
-For example:
+```
+sudo apt install libclang-dev llvm-dev
+make test CXXFLAGS="-I/usr/lib/llvm-18/include"
+```
 
-- (Ubuntu) Assuming you installed `libclang-dev` and `llvm-dev`, you should be able to run `make test CXXFLAGS="-I/usr/lib/llvm-18/include"`
-- (MacOS) Assuming you installed `llvm` with brew, you should be able to run `make test CXXFLAGS="-I/opt/homebrew/opt/llvm/include"`
+### MacOS
 
-If you're still having trouble building, I would recommend you take a look at how [CI builds and tests](/.github/workflows) this repository, as those provide
-minimal examples of a successful build.
+Building the plugin and running it on `example/main.c` should be as simple as installing the development header files then invoking `make`.
+Make sure you let the compiler know where the header files are located:
+
+```
+brew install llvm
+make test CXXFLAGS="-I/opt/homebrew/opt/llvm/include"
+```
+
+## Troubleshooting
+
+Make sure that the version of `clang` that you are using to invoke the plugin has the same version as the `clang` and `llvm` development header files
+you installed. Otherwise, you might get perplexing ABI errors.
+
+Otherwise, if you're still having trouble, I would recommend you take a look at how [CI builds and tests](/.github/workflows) this repository, as those provide
+minimal examples of working environments.
 
 ## Credits
 
