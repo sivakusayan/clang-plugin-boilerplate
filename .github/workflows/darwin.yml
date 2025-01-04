@@ -1,4 +1,4 @@
-name: Build and Run Plugin
+name: Darwin Build 
 
 on:
   push:
@@ -8,11 +8,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v4
     - name: Install dependencies
-      run: sudo apt install libclang-dev llvm-dev
+      run: brew install llvm
     - name: Build and run plugin
-      run: make test CXXFLAGS="-I/usr/lib/llvm-18/include"
+      run: make test CXXFLAGS="-I/opt/homebrew/opt/llvm/include"
