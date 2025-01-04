@@ -12,7 +12,7 @@ PLATFORM := $(shell uname -s)
 #    as that is not set by default on that platform. Otherwise, the linker will
 #    complain about undefined symbols.
 # 3. We need '-fno-rtti' for reasons I don't completely understand.
-override CXXFLAGS += -std=c++17 -shared -fPIC -fno-rtti
+override CXXFLAGS += -std=c++17 -shared -fPIC -fno-rtti -Wall
 ifeq ($(PLATFORM),Darwin)
 	override CXXFLAGS += -undefined dynamic_lookup
 endif
