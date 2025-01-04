@@ -13,6 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Install dependencies
-      run: sudo apt install libclang-dev llvm-dev
+      run: sudo apt install llvm-dev
     - name: Build and run plugin
       run: make test CXXFLAGS="-I/usr/lib/llvm-18/include"
