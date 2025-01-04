@@ -43,3 +43,9 @@ make test CXXFLAGS="-I/usr/lib/llvm-18/include"
 ```
 
 If you're still having trouble building, I would recommend you take a look at the [CI file](/.github/workflows/ci.yml) for a minimal example of successfully building this plugin.
+
+## Credits
+
+Thanks to the [clang-plugins-demo](https://github.com/nsumner/clang-plugins-demo) and the [clang-tutor](https://github.com/banach-space/clang-tutor) repositories for providing working examples
+that I could use to troubleshoot issues with!
+Those repositories also provide great examples of `clang` plugins that you can play around with.
