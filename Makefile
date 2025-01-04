@@ -17,7 +17,7 @@ ifeq ($(PLATFORM),Darwin)
 	override CXXFLAGS += -undefined dynamic_lookup
 endif
 print-struct.so: print-struct.cpp
-	$(CXX) $(CXXFLAGS) $(BLAH) print-struct.cpp -o print-struct.so
+	$(CXX) $(CXXFLAGS) print-struct.cpp -o print-struct.so
 
 #==================================================================
 # INVOKING THE PLUGIN
