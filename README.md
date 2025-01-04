@@ -39,4 +39,4 @@ If you're getting complaints about missing header files, you probably need to ad
 make test CXXFLAGS="-I/usr/lib/llvm-18/include"
 ```
 
-If you're still having trouble building, I would recommend you the [CI file](/.github/workflows/ci.yml) for a minimal example of successfully building this plugin.
+If you're still having trouble building, I would recommend you take a look at the [CI file](/.github/workflows/ci.yml) for a minimal example of successfully building this plugin.
