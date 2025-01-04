@@ -1,48 +1,41 @@
 This repository holds a barebones `clang` plugin that prints the name of all named structures in a C program.
-Note that this was only tested on Ubuntu 24.04.1 LTS and `clang` version 18, so your results may vary.
 The repository consists of:
 
 - `print-struct.cpp`: The code for the plugin in question
 - `example/main.c`: An extremely simple C program to demonstrate the plugin's functionality
 - A makefile that demonstrates how to build and run the plugin
 
+This repository does not have an example of building on Windows. If that is what you need, I recommend
+you take a look at the [clang-tutor](https://github.com/banach-space/clang-tutor) repository, which has examples of building `clang` plugins with `cmake`.
+
 ## Requirements
 
 You'll need:
 - A C++ compiler of your choice
   - You can override the C++ compiler that `make` chooses by defining the `CXX` environment variable
-- The `clang` compiler
-- An installed set of `clang` and `llvm` development header files.
-
-The slowest, but probably least error-prone way to satisfy the last two requirements is to follow the steps to [build and install](https://clang.llvm.org/get_started.html) `clang` from source.
-By using the latest version of `clang`, you reduce the chance of mishaps that happen when you tell `clang` to load your plugin, perhaps because of header file mismatches. This also gives you
-a nice excuse to hack on `clang` if you wish!
-
-Alternatively, you can just install the `clang` and `llvm` development packages. On Ubuntu, you should be able to run:
-
-```
-sudo apt install libclang-dev llvm-dev
-```
-
-Make sure that the version of the header files you are installing match the version of the `clang` compiler you want to invoke the plugin with.
-You might otherwise get some very confusing errors when you load the plugin.
+- An installed set of `clang` and `llvm` development header files. You can get these a few different ways:
+    - You can get these header files by [building and installing](https://clang.llvm.org/get_started.html) `clang` from source.
+    - (Ubuntu) Install the `clang` and `llvm` development packages by running `sudo apt install libclang-dev llvm-dev`
+    - (MacOS) Install `llvm` with homebrew by running `brew install llvm`
+- A `clang` compiler whose version matches the version of the header files you have installed
+    - If you don't follow this step, you might get some confusing ABI related issues.
 
 ## Building and Running
 
-Building the plugin and running it on the example C file should be as simple as:
+Building the plugin and running it on `example/main.c` should be as simple as running:
 
 ```
 make test
 ```
 
-If you're getting complaints about missing header files, you probably need to add a `CXXFLAG` to specify what the include paths are for the `clang` and `llvm` development header files. If you installed
-`libclang-dev` and `llvm-dev` on Ubuntu above, you should be able to run:
+If you're getting complaints about missing header files, you probably need to add a `CXXFLAG` to specify what the include paths are for the `clang` and `llvm` development header files.
+For example:
 
-```
-make test CXXFLAGS="-I/usr/lib/llvm-18/include"
-```
+- (Ubuntu) Assuming you installed `libclang-dev` and `llvm-dev`, you should be able to run `make test CXXFLAGS="-I/usr/lib/llvm-18/include"`
+- (MacOS) Assuming you installed `llvm` with brew, you should be able to run `make test CXXFLAGS="-I/opt/homebrew/opt/llvm/include"`
 
-If you're still having trouble building, I would recommend you take a look at the [CI file](/.github/workflows/ci.yml) for a minimal example of successfully building this plugin.
+If you're still having trouble building, I would recommend you take a look at how [CI builds and tests](/.github/workflows) this repository, as those provide
+minimal examples of a successful build.
 
 ## Credits
 
