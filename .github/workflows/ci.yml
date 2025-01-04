@@ -15,4 +15,4 @@ jobs:
     - name: Install dependencies
       run: sudo apt install libclang-dev llvm-dev
     - name: Build and run plugin
-      run: make test
+      run: make test CXXFLAGS="-I/usr/lib/llvm-18/include"
