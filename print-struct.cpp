@@ -38,7 +38,7 @@ public:
   }
 };
 
-class FindNamedClassAction : public clang::PluginASTAction {
+class PrintStructAction : public clang::PluginASTAction {
 public:
   std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &Compiler,
                                                         llvm::StringRef InFile) override {
@@ -50,5 +50,5 @@ public:
   }
 };
 
-static FrontendPluginRegistry::Add<FindNamedClassAction>
+static FrontendPluginRegistry::Add<PrintStructAction>
     X(/*Name=*/"print-struct", /*Description=*/"Prints the name and members of a C structure.");
